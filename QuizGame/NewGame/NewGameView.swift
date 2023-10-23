@@ -14,14 +14,14 @@ struct NewGameView: View {
         VStack {
             Spacer()
 
-            Text("Qual é o tema do seu novo jogo?")
+            Text("What's the theme of your challenge?")
                 .font(.largeTitle)
                 .bold()
 
             Spacer()
 
             HStack {
-                TextField("Custom theme", text: $gameTheme)
+                TextField("Rocket science", text: $gameTheme)
                     .textFieldStyle(.roundedBorder)
 
                 Button {
