@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NewGameView: View {
+struct HomeView: View {
     @State private var gameTheme: String = ""
 
     var body: some View {
@@ -44,6 +44,6 @@ struct NewGameView: View {
 
 struct NewGameView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGameView()
+        HomeView()
     }
 }
