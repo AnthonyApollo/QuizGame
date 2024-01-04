@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewGameView: View {
-    @State private var gameTheme: String = ""
+    @StateObject var viewModel = NewGameViewModel()
     
     var body: some View {
         VStack {
@@ -21,21 +21,21 @@ struct NewGameView: View {
             Spacer()
 
             HStack {
-                TextField("Rocket science", text: $gameTheme)
+                TextField("Rocket science", text: $viewModel.gameTheme)
                     .textFieldStyle(.roundedBorder)
 
                 Button {
-                    // TODO: Implement button action
+                    viewModel.createGame()
                 } label: {
-                    if gameTheme.isEmpty {
+                    if viewModel.gameTheme.isEmpty {
                         Image(systemName: "arrow.up.circle")
                     } else {
                         Image(systemName: "arrow.up.circle.fill")
                     }
                 }
                 .font(.title2)
-                .disabled(gameTheme.isEmpty)
-                .animation(.default, value: gameTheme.isEmpty)
+                .disabled(viewModel.gameTheme.isEmpty)
+                .animation(.default, value: viewModel.gameTheme.isEmpty)
             }
             .padding()
         }

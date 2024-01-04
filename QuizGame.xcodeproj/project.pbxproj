@@ -13,6 +13,7 @@
 		156D5E622AE742AB00E166B1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D5E612AE742AB00E166B1 /* Game.swift */; };
 		156D5E692AE7458C00E166B1 /* GeneratedGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D5E682AE7458C00E166B1 /* GeneratedGameView.swift */; };
 		156D5E6B2AE745FF00E166B1 /* GeneratedGame+Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D5E6A2AE745FF00E166B1 /* GeneratedGame+Dummy.swift */; };
+		15B8CB3C2B4716FB00825E3C /* NewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B8CB3B2B4716FB00825E3C /* NewGameViewModel.swift */; };
 		15FD24892AE5C38400CF5B11 /* QuizGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD24882AE5C38400CF5B11 /* QuizGameApp.swift */; };
 		15FD248D2AE5C39300CF5B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15FD248C2AE5C39300CF5B11 /* Assets.xcassets */; };
 		15FD24902AE5C39300CF5B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15FD248F2AE5C39300CF5B11 /* Preview Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		156D5E612AE742AB00E166B1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		156D5E682AE7458C00E166B1 /* GeneratedGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedGameView.swift; sourceTree = "<group>"; };
 		156D5E6A2AE745FF00E166B1 /* GeneratedGame+Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedGame+Dummy.swift"; sourceTree = "<group>"; };
+		15B8CB3B2B4716FB00825E3C /* NewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModel.swift; sourceTree = "<group>"; };
 		15FD24852AE5C38400CF5B11 /* QuizGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15FD24882AE5C38400CF5B11 /* QuizGameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizGameApp.swift; sourceTree = "<group>"; };
 		15FD248C2AE5C39300CF5B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -108,9 +110,9 @@
 		156D5E632AE7452900E166B1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				15B8CB392B4716D100825E3C /* NewGame */,
 				156D5E602AE7428D00E166B1 /* Models */,
 				156D5E682AE7458C00E166B1 /* GeneratedGameView.swift */,
-				1556198D2B462B02001A15C0 /* NewGameView.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -121,6 +123,15 @@
 				156D5E6A2AE745FF00E166B1 /* GeneratedGame+Dummy.swift */,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		15B8CB392B4716D100825E3C /* NewGame */ = {
+			isa = PBXGroup;
+			children = (
+				1556198D2B462B02001A15C0 /* NewGameView.swift */,
+				15B8CB3B2B4716FB00825E3C /* NewGameViewModel.swift */,
+			);
+			path = NewGame;
 			sourceTree = "<group>";
 		};
 		15FD247C2AE5C38400CF5B11 = {
@@ -313,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15FD24892AE5C38400CF5B11 /* QuizGameApp.swift in Sources */,
+				15B8CB3C2B4716FB00825E3C /* NewGameViewModel.swift in Sources */,
 				156D5E622AE742AB00E166B1 /* Game.swift in Sources */,
 				156D5E692AE7458C00E166B1 /* GeneratedGameView.swift in Sources */,
 				156D5E6B2AE745FF00E166B1 /* GeneratedGame+Dummy.swift in Sources */,
