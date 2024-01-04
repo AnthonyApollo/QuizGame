@@ -21,7 +21,7 @@ struct HomeView: View {
         }
         .sheet(isPresented: $shouldPresentConfigSheet) {
             // TODO: Implement config sheet
-            Text("test")
+            Text("TODO: Implement config sheet")
         }
     }
 }
