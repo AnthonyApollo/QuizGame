@@ -97,14 +97,6 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		156D5E5F2AE7428100E166B1 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				156D5E602AE7428D00E166B1 /* Models */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		156D5E602AE7428D00E166B1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +108,7 @@
 		156D5E632AE7452900E166B1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				156D5E602AE7428D00E166B1 /* Models */,
 				156D5E682AE7458C00E166B1 /* GeneratedGameView.swift */,
 				1556198D2B462B02001A15C0 /* NewGameView.swift */,
 			);
@@ -155,7 +148,6 @@
 			children = (
 				155619912B463691001A15C0 /* Shared */,
 				156D5E632AE7452900E166B1 /* Game */,
-				156D5E5F2AE7428100E166B1 /* Network */,
 				150C5C772AE5E4BD0092B219 /* Home */,
 				15FD24882AE5C38400CF5B11 /* QuizGameApp.swift */,
 				15FD248C2AE5C39300CF5B11 /* Assets.xcassets */,
