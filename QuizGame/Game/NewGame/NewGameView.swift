@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct NewGameView: View {
-    @StateObject var viewModel = NewGameViewModel()
-    
+    @ObservedObject var viewModel: NewGameViewModel
+
     var body: some View {
         VStack {
             Spacer()
@@ -44,6 +44,6 @@ struct NewGameView: View {
 
 struct NewGameView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGameView()
+        NewGameView(viewModel: .init())
     }
 }

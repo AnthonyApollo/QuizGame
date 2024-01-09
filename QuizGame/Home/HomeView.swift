@@ -8,16 +8,23 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject var viewModel = NewGameViewModel()
     @State var shouldPresentConfigSheet = false
-
+    
     var body: some View {
         NavigationView {
-            NewGameView()
-                .toolbar {
-                    ConfigToolbarItem {
-                        shouldPresentConfigSheet.toggle()
-                    }
+            Group {
+                if let game = viewModel.generatedGame {
+                    GeneratedGameView(generatedGame: game)
+                } else {
+                    NewGameView(viewModel: viewModel)
                 }
+            }
+            .toolbar {
+                ConfigToolbarItem {
+                    shouldPresentConfigSheet.toggle()
+                }
+            }
         }
         .sheet(isPresented: $shouldPresentConfigSheet) {
             // TODO: Implement config sheet
