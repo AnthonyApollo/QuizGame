@@ -14,7 +14,7 @@ final class NewGameRepository {
     var decoder: JSONDecoder = .init()
 
     func createGame(withTheme theme: String) -> AnyPublisher<GeneratedGame, Error> {
-        let response: AnyPublisher<OpenAIChatResponse?, RequestError> = httpClient.requestJSON(for: NewGameRequest())
+        let response: AnyPublisher<OpenAIChatResponse?, RequestError> = httpClient.requestJSON(for: NewGameRequest(gameTheme: theme))
 
         return response
             .compactMap { $0?.choices.first?.message.content.data(using: .utf8) }
