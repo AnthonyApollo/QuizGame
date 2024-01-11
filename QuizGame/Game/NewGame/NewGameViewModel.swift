@@ -17,7 +17,9 @@ final class NewGameViewModel: ObservableObject {
     func createGame() {
         repository.createGame(withTheme: gameTheme)
             .sink { completion in
-                print(completion)
+                if case .failure = completion {
+                    // TODO: Handle error
+                }
             } receiveValue: { generatedGame in
                 self.generatedGame = generatedGame
             }
