@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		150C5C792AE5E4F40092B219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C5C782AE5E4F40092B219 /* HomeView.swift */; };
 		153CE99B2B474E42000FEC3D /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CE99A2B474E42000FEC3D /* APIConstants.swift */; };
-		1548F58C2B485EA20050B29B /* NetworkingTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548F58B2B485EA20050B29B /* NetworkingTypes.swift */; };
 		1548F58E2B487B6F0050B29B /* OpenAIRequestMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548F58D2B487B6F0050B29B /* OpenAIRequestMapper.swift */; };
 		1556198E2B462B02001A15C0 /* NewGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1556198D2B462B02001A15C0 /* NewGameView.swift */; };
 		155619932B4636B0001A15C0 /* ConfigToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155619922B4636B0001A15C0 /* ConfigToolbarItem.swift */; };
@@ -18,7 +17,7 @@
 		156D5E6B2AE745FF00E166B1 /* GeneratedGame+Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156D5E6A2AE745FF00E166B1 /* GeneratedGame+Dummy.swift */; };
 		15B8CB3C2B4716FB00825E3C /* NewGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B8CB3B2B4716FB00825E3C /* NewGameViewModel.swift */; };
 		15B8CB3F2B47184A00825E3C /* NewGameRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B8CB3E2B47184A00825E3C /* NewGameRepository.swift */; };
-		15B8CB422B471E6E00825E3C /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B8CB412B471E6E00825E3C /* HTTPClient.swift */; };
+		15B8CB422B471E6E00825E3C /* CombineHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B8CB412B471E6E00825E3C /* CombineHTTPClient.swift */; };
 		15B8CB442B471F2400825E3C /* NewGameRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B8CB432B471F2400825E3C /* NewGameRequest.swift */; };
 		15C6B4822B4E1289005ED6CB /* OpenAIChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C6B4812B4E1289005ED6CB /* OpenAIChatResponse.swift */; };
 		15FD24892AE5C38400CF5B11 /* QuizGameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD24882AE5C38400CF5B11 /* QuizGameApp.swift */; };
@@ -49,7 +48,6 @@
 /* Begin PBXFileReference section */
 		150C5C782AE5E4F40092B219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		153CE99A2B474E42000FEC3D /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
-		1548F58B2B485EA20050B29B /* NetworkingTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTypes.swift; sourceTree = "<group>"; };
 		1548F58D2B487B6F0050B29B /* OpenAIRequestMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIRequestMapper.swift; sourceTree = "<group>"; };
 		1556198D2B462B02001A15C0 /* NewGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameView.swift; sourceTree = "<group>"; };
 		155619922B4636B0001A15C0 /* ConfigToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigToolbarItem.swift; sourceTree = "<group>"; };
@@ -58,7 +56,7 @@
 		156D5E6A2AE745FF00E166B1 /* GeneratedGame+Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneratedGame+Dummy.swift"; sourceTree = "<group>"; };
 		15B8CB3B2B4716FB00825E3C /* NewGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewModel.swift; sourceTree = "<group>"; };
 		15B8CB3E2B47184A00825E3C /* NewGameRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameRepository.swift; sourceTree = "<group>"; };
-		15B8CB412B471E6E00825E3C /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		15B8CB412B471E6E00825E3C /* CombineHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineHTTPClient.swift; sourceTree = "<group>"; };
 		15B8CB432B471F2400825E3C /* NewGameRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameRequest.swift; sourceTree = "<group>"; };
 		15C6B4812B4E1289005ED6CB /* OpenAIChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIChatResponse.swift; sourceTree = "<group>"; };
 		15FD24852AE5C38400CF5B11 /* QuizGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,9 +152,8 @@
 		15B8CB402B471E2A00825E3C /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				15B8CB412B471E6E00825E3C /* HTTPClient.swift */,
+				15B8CB412B471E6E00825E3C /* CombineHTTPClient.swift */,
 				153CE99A2B474E42000FEC3D /* APIConstants.swift */,
-				1548F58B2B485EA20050B29B /* NetworkingTypes.swift */,
 				1548F58D2B487B6F0050B29B /* OpenAIRequestMapper.swift */,
 			);
 			path = Network;
@@ -359,10 +356,9 @@
 				156D5E6B2AE745FF00E166B1 /* GeneratedGame+Dummy.swift in Sources */,
 				15B8CB442B471F2400825E3C /* NewGameRequest.swift in Sources */,
 				150C5C792AE5E4F40092B219 /* HomeView.swift in Sources */,
-				15B8CB422B471E6E00825E3C /* HTTPClient.swift in Sources */,
+				15B8CB422B471E6E00825E3C /* CombineHTTPClient.swift in Sources */,
 				153CE99B2B474E42000FEC3D /* APIConstants.swift in Sources */,
 				15B8CB3F2B47184A00825E3C /* NewGameRepository.swift in Sources */,
-				1548F58C2B485EA20050B29B /* NetworkingTypes.swift in Sources */,
 				1556198E2B462B02001A15C0 /* NewGameView.swift in Sources */,
 				15C6B4822B4E1289005ED6CB /* OpenAIChatResponse.swift in Sources */,
 				1548F58E2B487B6F0050B29B /* OpenAIRequestMapper.swift in Sources */,
