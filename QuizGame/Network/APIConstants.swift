@@ -11,6 +11,6 @@ enum APIConstants {
     static let openAIBaseURL = URL(string: "https://api.openai.com/v1")!
     static let defaultHeaders: HTTPHeaders = [
         "Content-Type" : "application/json",
-        "Authorization": "Bearer "
+        "Authorization": "Bearer \(ProcessInfo.processInfo.environment["OPEN_AI_API_KEY"]!)"
     ]
 }
