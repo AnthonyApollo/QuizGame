@@ -124,7 +124,6 @@
 		156D5E632AE7452900E166B1 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				15B8CB392B4716D100825E3C /* NewGame */,
 				156D5E602AE7428D00E166B1 /* Models */,
 				156D5E682AE7458C00E166B1 /* GeneratedGameView.swift */,
 			);
@@ -188,6 +187,7 @@
 				15B8CB402B471E2A00825E3C /* Network */,
 				155619912B463691001A15C0 /* Shared */,
 				156D5E632AE7452900E166B1 /* Game */,
+				15B8CB392B4716D100825E3C /* NewGame */,
 				150C5C772AE5E4BD0092B219 /* Home */,
 				15FD24882AE5C38400CF5B11 /* QuizGameApp.swift */,
 				15FD248C2AE5C39300CF5B11 /* Assets.xcassets */,
