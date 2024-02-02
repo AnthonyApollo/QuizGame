@@ -11,17 +11,28 @@ struct GeneratedGameView: View {
     var generatedGame: GeneratedGame
 
     var body: some View {
-        VStack {
-            Text(generatedGame.theme)
-                .font(.headline)
+        GeometryReader { proxy in
+            VStack {
+                Text(generatedGame.theme)
+                    .font(.headline)
 
-            ZStack {
-                ForEach(generatedGame.questions) { generatedQuestion in
-                    QuestionView(generatedQuestion: generatedQuestion)
+                ScrollViewReader { scrollView in
+                    ScrollView([.horizontal], showsIndicators: false) {
+                        LazyHStack {
+                            ForEach(generatedGame.questions, id: \.id) { question in
+                                QuestionView(generatedQuestion: question) {
+                                    withAnimation {
+                                        scrollView.scrollTo(question.id + 1, anchor: .leading)
+                                    }
+                                }
+                                .frame(width: proxy.size.width)
+                                .id(question.id)
+                            }
+                        }
+                    }
+                    .scrollDisabled(true)
                 }
             }
-
-            Spacer()
         }
     }
 }

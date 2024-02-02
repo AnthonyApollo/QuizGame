@@ -17,5 +17,5 @@ struct GeneratedQuestion: Decodable, Identifiable {
     let topic: String
     let question: String
     let answers: [String]
-    let correctAnswer: Int
+    let correctAnswer: String
 }
