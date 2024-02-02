@@ -11,6 +11,7 @@ struct QuestionView: View {
     var generatedQuestion: GeneratedQuestion
     var onAnswered: () -> Void
     @State private var selectedAnswer: String?
+    @State private var isQuestionAnswered: Bool = false
 
     var body: some View {
         ZStack {
@@ -36,14 +37,11 @@ struct QuestionView: View {
                             .buttonStyle(.borderedProminent)
                             .font(.title3)
                             .cornerRadius(10)
-                            .tint(selectedAnswer == answer ? .blue : .secondary)
+                            .tint(getColor(by: answer, isSelected: selectedAnswer == answer))
 
-                            if selectedAnswer == answer {
+                            if selectedAnswer == answer && !isQuestionAnswered {
                                 Button {
-                                    if selectedAnswer == generatedQuestion.correctAnswer {
-                                        // TODO: Style correct answer
-                                    }
-
+                                    isQuestionAnswered = true
                                     onAnswered()
                                 } label: {
                                     Image(systemName: "checkmark.circle.fill")
@@ -54,9 +52,18 @@ struct QuestionView: View {
                     }
                 }
                 Spacer()
+
             }
             .padding()
         }
+    }
+
+    private func getColor(by answer: String, isSelected: Bool) -> Color {
+        guard isQuestionAnswered else {
+            return isSelected ? .blue : .secondary
+        }
+
+        return generatedQuestion.correctAnswer == answer ? .green : .red
     }
 }
 
