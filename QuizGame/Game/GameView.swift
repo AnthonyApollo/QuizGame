@@ -8,30 +8,30 @@
 import SwiftUI
 
 struct GameView: View {
-    var generatedGame: GeneratedGame
+    @EnvironmentObject var viewModel: NewGameViewModel
 
     var body: some View {
-        GeometryReader { proxy in
-            VStack {
-                Text(generatedGame.theme)
-                    .font(.headline)
+        if let generatedGame = viewModel.generatedGame {
+            QuestionsView(generatedGame: generatedGame)
+        } else {
+            LoadingGameView()
+        }
+    }
+}
 
-                ScrollViewReader { scrollView in
-                    ScrollView([.horizontal], showsIndicators: false) {
-                        LazyHStack {
-                            ForEach(generatedGame.questions, id: \.id) { question in
-                                QuestionView(generatedQuestion: question) {
-                                    withAnimation {
-                                        scrollView.scrollTo(question.id + 1, anchor: .leading)
-                                    }
-                                }
-                                .frame(width: proxy.size.width)
-                                .id(question.id)
-                            }
-                        }
-                    }
-                    .scrollDisabled(true)
-                }
+struct LoadingGameView: View {
+    @EnvironmentObject var viewModel: NewGameViewModel
+
+    var body: some View {
+        VStack {
+            Text("Loading game...")
+                .font(.largeTitle)
+                .bold()
+
+            Button {
+                viewModel.cancel()
+            } label: {
+                Text("Cancel")
             }
         }
     }
@@ -40,6 +40,7 @@ struct GameView: View {
 
 struct GeneratedGameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(generatedGame: .dummy())
+        GameView()
+            .environmentObject(NewGameViewModel())
     }
 }

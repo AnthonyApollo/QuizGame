@@ -14,10 +14,10 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             Group {
-                if let game = viewModel.generatedGame {
-                    GameView(generatedGame: game)
+                if viewModel.shouldPresentGame {
+                    GameView()
                 } else {
-                    NewGameView(viewModel: viewModel)
+                    NewGameView()
                 }
             }
             .toolbar {
@@ -30,6 +30,7 @@ struct HomeView: View {
             // TODO: Implement config sheet
             Text("TODO: Implement config sheet")
         }
+        .environmentObject(viewModel)
     }
 }
 

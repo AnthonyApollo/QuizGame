@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewGameView: View {
-    @ObservedObject var viewModel: NewGameViewModel
+    @EnvironmentObject var viewModel: NewGameViewModel
 
     var body: some View {
         VStack {
@@ -44,6 +44,7 @@ struct NewGameView: View {
 
 struct NewGameView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGameView(viewModel: .init())
+        NewGameView()
+            .environmentObject(NewGameViewModel())
     }
 }
