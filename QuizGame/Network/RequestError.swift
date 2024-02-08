@@ -6,7 +6,7 @@
 //
 
 struct RequestError: RawRepresentable, Error {
-    static let url = RequestError(rawValue: "Could not parse a valid URL.")
+    static let url = RequestError(rawValue: "Failed to construct a valid URL.")
 
     let rawValue: String
 
