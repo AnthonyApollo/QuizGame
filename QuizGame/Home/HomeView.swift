@@ -15,7 +15,7 @@ struct HomeView: View {
         NavigationView {
             Group {
                 if let game = viewModel.generatedGame {
-                    GeneratedGameView(generatedGame: game)
+                    GameView(generatedGame: game)
                 } else {
                     NewGameView(viewModel: viewModel)
                 }

@@ -1,5 +1,5 @@
 //
-//  GeneratedGameView.swift
+//  GameView.swift
 //  QuizGame
 //
 //  Created by Anthony Apollo on 23/10/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GeneratedGameView: View {
+struct GameView: View {
     var generatedGame: GeneratedGame
 
     var body: some View {
@@ -40,6 +40,6 @@ struct GeneratedGameView: View {
 
 struct GeneratedGameView_Previews: PreviewProvider {
     static var previews: some View {
-        GeneratedGameView(generatedGame: .dummy())
+        GameView(generatedGame: .dummy())
     }
 }
