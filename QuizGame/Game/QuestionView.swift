@@ -9,53 +9,60 @@ import SwiftUI
 
 struct QuestionView: View {
     var generatedQuestion: GeneratedQuestion
-    var onAnswered: () -> Void
+    var hasNextQuestion: Bool
+    var nextQuestionAction: () -> Void
     @State private var selectedAnswer: String?
     @State private var isQuestionAnswered: Bool = false
 
     var body: some View {
-        ZStack {
-            Color(.systemBackground)
+        VStack(alignment: .leading) {
+            Text(generatedQuestion.topic)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .padding(.bottom, 12)
+
+            Text(generatedQuestion.question)
+                .font(.title2)
+                .bold()
 
             VStack(alignment: .leading) {
-                Text(generatedQuestion.topic)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                    .padding(.bottom, 12)
+                ForEach(generatedQuestion.answers, id: \.self) { answer in
+                    HStack(alignment: .center) {
+                        Button(answer) {
+                            selectedAnswer = answer
+                        }
+                        .padding(.bottom, 12)
+                        .buttonStyle(.borderedProminent)
+                        .font(.title3)
+                        .cornerRadius(10)
+                        .tint(getColor(by: answer, isSelected: selectedAnswer == answer))
 
-                Text(generatedQuestion.question)
-                    .font(.title2)
-                    .bold()
-
-                VStack(alignment: .leading) {
-                    ForEach(generatedQuestion.answers, id: \.self) { answer in
-                        HStack(alignment: .center) {
-                            Button(answer) {
-                                selectedAnswer = answer
-                            }
-                            .padding(.bottom, 12)
-                            .buttonStyle(.borderedProminent)
-                            .font(.title3)
-                            .cornerRadius(10)
-                            .tint(getColor(by: answer, isSelected: selectedAnswer == answer))
-
-                            if selectedAnswer == answer && !isQuestionAnswered {
-                                Button {
-                                    isQuestionAnswered = true
-                                    onAnswered()
-                                } label: {
-                                    Image(systemName: "checkmark.circle.fill")
-                                        .font(.title)
-                                }
+                        if selectedAnswer == answer && !isQuestionAnswered {
+                            Button {
+                                isQuestionAnswered = true
+                            } label: {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.title)
                             }
                         }
                     }
                 }
-                Spacer()
-
             }
-            .padding()
+
+            Spacer()
+                .frame(maxWidth: .infinity)
+
+            if isQuestionAnswered && hasNextQuestion {
+                Button {
+                    nextQuestionAction()
+                } label: {
+                    Text("Next")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+            }
         }
+        .padding()
     }
 
     private func getColor(by answer: String, isSelected: Bool) -> Color {
@@ -69,6 +76,6 @@ struct QuestionView: View {
 
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionView(generatedQuestion: GeneratedGame.fixture().questions.first!) {}
+        QuestionView(generatedQuestion: GeneratedGame.fixture().questions.first!, hasNextQuestion: true) {}
     }
 }
