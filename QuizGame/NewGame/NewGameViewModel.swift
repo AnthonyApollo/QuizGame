@@ -13,8 +13,12 @@ final class NewGameViewModel: ObservableObject {
     @Published var generatedGame: GeneratedGame?
     @Published var shouldPresentGame: Bool = false
 
-    var repository: NewGameRepositoryProtocol = NewGameRepository()
+    private let repository: NewGameRepositoryProtocol
     private var subscriptions = Set<AnyCancellable>()
+
+    init(repository: NewGameRepositoryProtocol = NewGameRepository()) {
+        self.repository = repository
+    }
 
     func createGame() {
         shouldPresentGame = true

@@ -46,6 +46,6 @@ struct NewGameView: View {
 struct NewGameView_Previews: PreviewProvider {
     static var previews: some View {
         NewGameView()
-            .environmentObject(NewGameViewModel())
+            .environmentObject(NewGameViewModel(repository: NewGameRepositoryStub()))
     }
 }
