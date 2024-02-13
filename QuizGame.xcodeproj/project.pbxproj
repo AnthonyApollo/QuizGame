@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		150C5C792AE5E4F40092B219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C5C782AE5E4F40092B219 /* HomeView.swift */; };
+		151380F92B7BBBD500A0FBCA /* NewGameRepositoryStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151380F82B7BBBD500A0FBCA /* NewGameRepositoryStub.swift */; };
 		153CE99B2B474E42000FEC3D /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CE99A2B474E42000FEC3D /* APIConstants.swift */; };
 		1548F58E2B487B6F0050B29B /* OpenAIRequestMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548F58D2B487B6F0050B29B /* OpenAIRequestMapper.swift */; };
 		1556198E2B462B02001A15C0 /* NewGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1556198D2B462B02001A15C0 /* NewGameView.swift */; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		150C5C782AE5E4F40092B219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		151380F82B7BBBD500A0FBCA /* NewGameRepositoryStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameRepositoryStub.swift; sourceTree = "<group>"; };
 		153CE99A2B474E42000FEC3D /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		1548F58D2B487B6F0050B29B /* OpenAIRequestMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIRequestMapper.swift; sourceTree = "<group>"; };
 		1556198D2B462B02001A15C0 /* NewGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				156D5E6A2AE745FF00E166B1 /* GeneratedGame+Fixture.swift */,
+				151380F82B7BBBD500A0FBCA /* NewGameRepositoryStub.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				151380F92B7BBBD500A0FBCA /* NewGameRepositoryStub.swift in Sources */,
 				156CCEDD2B55FAAB00D430C9 /* QuestionView.swift in Sources */,
 				15FD24892AE5C38400CF5B11 /* QuizGameApp.swift in Sources */,
 				15B8CB3C2B4716FB00825E3C /* NewGameViewModel.swift in Sources */,

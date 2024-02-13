@@ -8,7 +8,11 @@
 import Combine
 import Foundation
 
-final class NewGameRepository {
+protocol NewGameRepositoryProtocol {
+    func createGame(withTheme theme: String) -> AnyPublisher<GeneratedGame, Error>
+}
+
+final class NewGameRepository: NewGameRepositoryProtocol {
 
     var httpClient: CombineHTTPClientProtocol = CombineHTTPClient()
     var decoder: JSONDecoder = .init()
