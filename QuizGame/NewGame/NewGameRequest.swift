@@ -18,9 +18,10 @@ struct NewGameRequest: Requestable {
 }
 
 struct OpenAIChatRequest: Encodable {
-    let model = "gpt-3.5-turbo"
+    let model = "gpt-4-0125-preview"
     let messages: [OpenAIChatMessage]
     let stream = false
+    let responseFormat = OpenAIResponseFormat()
 
     init(gameTheme: String) {
         messages = [
@@ -34,9 +35,20 @@ struct OpenAIChatRequest: Encodable {
             )
         ]
     }
+
+    enum CodingKeys: String, CodingKey {
+        case model
+        case messages
+        case stream
+        case responseFormat = "response_format"
+    }
 }
 
 struct OpenAIChatMessage: Codable {
     let role: String
     let content: String
+}
+
+struct OpenAIResponseFormat: Encodable {
+    let type: String = "json_object"
 }
