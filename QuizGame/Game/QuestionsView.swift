@@ -16,7 +16,7 @@ struct QuestionsView: View {
                 ScrollView([.horizontal], showsIndicators: false) {
                     LazyHStack {
                         ForEach(generatedGame.questions, id: \.id) { question in
-                            QuestionView(generatedQuestion: question, hasNextQuestion: question.id + 1 < generatedGame.questions.count) {
+                            QuestionView(generatedQuestion: question, hasNextQuestion: question.id + 1 <= generatedGame.questions.count) {
                                 withAnimation {
                                     scrollView.scrollTo(question.id + 1, anchor: .leading)
                                 }
