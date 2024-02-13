@@ -69,6 +69,6 @@ struct QuestionView: View {
 
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionView(generatedQuestion: GeneratedGame.dummy().questions.first!) {}
+        QuestionView(generatedQuestion: GeneratedGame.fixture().questions.first!) {}
     }
 }

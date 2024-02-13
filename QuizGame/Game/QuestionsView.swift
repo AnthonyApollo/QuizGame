@@ -34,5 +34,5 @@ struct QuestionsView: View {
 }
 
 #Preview {
-    QuestionsView(generatedGame: .dummy())
+    QuestionsView(generatedGame: .fixture())
 }
