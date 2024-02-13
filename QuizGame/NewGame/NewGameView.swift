@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewGameView: View {
     @EnvironmentObject var viewModel: NewGameViewModel
+    var confirmAction: (() -> Void)?
 
     var body: some View {
         VStack {
@@ -25,7 +26,7 @@ struct NewGameView: View {
                     .textFieldStyle(.roundedBorder)
 
                 Button {
-                    viewModel.createGame()
+                    confirmAction?()
                 } label: {
                     if viewModel.gameTheme.isEmpty {
                         Image(systemName: "arrow.up.circle")

@@ -10,20 +10,20 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var viewModel = NewGameViewModel()
     @State var shouldPresentConfigSheet = false
-    
+    @State private var navigationPath: [String] = []
+
     var body: some View {
-        NavigationView {
-            Group {
-                if viewModel.shouldPresentGame {
-                    GameView()
-                } else {
-                    NewGameView()
-                }
+        NavigationStack(path: $navigationPath) {
+            NewGameView() {
+                navigationPath.append("game")
             }
             .toolbar {
                 ConfigToolbarItem {
                     shouldPresentConfigSheet.toggle()
                 }
+            }
+            .navigationDestination(for: String.self) { _ in
+                GameView()
             }
         }
         .sheet(isPresented: $shouldPresentConfigSheet) {

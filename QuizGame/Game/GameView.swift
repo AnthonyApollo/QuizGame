@@ -15,6 +15,9 @@ struct GameView: View {
             QuestionsView(generatedGame: generatedGame)
         } else {
             LoadingGameView()
+                .onAppear {
+                    viewModel.createGame()
+                }
         }
     }
 }
@@ -23,17 +26,9 @@ struct LoadingGameView: View {
     @EnvironmentObject var viewModel: NewGameViewModel
 
     var body: some View {
-        VStack {
-            Text("Loading game...")
-                .font(.largeTitle)
-                .bold()
-
-            Button {
-                viewModel.cancel()
-            } label: {
-                Text("Cancel")
-            }
-        }
+        Text("Loading game...")
+            .font(.largeTitle)
+            .bold()
     }
 }
 
