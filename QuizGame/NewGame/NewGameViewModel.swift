@@ -11,7 +11,6 @@ import Combine
 final class NewGameViewModel: ObservableObject {
     @Published var gameTheme: String = ""
     @Published var generatedGame: GeneratedGame?
-    @Published var shouldPresentGame: Bool = false
 
     private let repository: NewGameRepositoryProtocol
     private var subscriptions = Set<AnyCancellable>()
@@ -21,14 +20,11 @@ final class NewGameViewModel: ObservableObject {
     }
 
     func createGame() {
-        shouldPresentGame = true
-
         repository.createGame(withTheme: gameTheme)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 if case .failure = completion {
                     // TODO: Handle error
-                    self.shouldPresentGame = false
                 }
             } receiveValue: { generatedGame in
                 self.generatedGame = generatedGame
@@ -37,7 +33,11 @@ final class NewGameViewModel: ObservableObject {
     }
 
     func cancel() {
-        shouldPresentGame = false
         subscriptions.forEach { $0.cancel() }
     }
+
+    func clearGame() {
+        generatedGame = nil
+    }
+
 }

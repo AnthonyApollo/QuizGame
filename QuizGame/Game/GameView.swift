@@ -13,6 +13,9 @@ struct GameView: View {
     var body: some View {
         if let generatedGame = viewModel.generatedGame {
             QuestionsView(generatedGame: generatedGame)
+                .onDisappear {
+                    viewModel.clearGame()
+                }
         } else {
             LoadingGameView()
                 .onAppear {
