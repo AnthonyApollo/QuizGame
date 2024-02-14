@@ -27,8 +27,7 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $shouldPresentConfigSheet) {
-            // TODO: Implement config sheet
-            Text("TODO: Implement config sheet")
+            SettingsView()
         }
         .environmentObject(viewModel)
     }

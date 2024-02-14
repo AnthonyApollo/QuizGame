@@ -18,7 +18,7 @@ struct NewGameRequest: Requestable {
 }
 
 struct OpenAIChatRequest: Encodable {
-    let model = "gpt-4-0125-preview"
+    let model: GPTModel = .gpt4
     let messages: [OpenAIChatMessage]
     let stream = false
     let responseFormat = OpenAIResponseFormat()
@@ -51,4 +51,9 @@ struct OpenAIChatMessage: Codable {
 
 struct OpenAIResponseFormat: Encodable {
     let type: String = "json_object"
+}
+
+enum GPTModel: String, CaseIterable, Encodable {
+    case gpt3 = "gpt-3.5-turbo"
+    case gpt4 = "gpt-4-0125-preview"
 }
