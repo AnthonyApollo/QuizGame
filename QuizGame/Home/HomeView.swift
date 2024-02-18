@@ -11,6 +11,7 @@ struct HomeView: View {
     @StateObject var viewModel = NewGameViewModel()
     @State var shouldPresentConfigSheet = false
     @State private var navigationPath: [String] = []
+    @State private var colorScheme: ColorScheme = .dark
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -27,9 +28,10 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $shouldPresentConfigSheet) {
-            SettingsView()
+            SettingsView(colorScheme: $colorScheme)
         }
         .environmentObject(viewModel)
+        .preferredColorScheme(colorScheme)
     }
 }
 

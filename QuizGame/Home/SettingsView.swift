@@ -9,15 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    enum ColorScheme: String, CaseIterable {
-        case system
-        case light
-        case dark
-    }
-
     @State private var numberOfQuestions = 5
     @State private var gptModel: GPTModel = .gpt4
-    @State private var colorScheme: ColorScheme = .system
+    @Binding var colorScheme: ColorScheme
 
     var body: some View {
         NavigationStack {
@@ -39,7 +33,7 @@ struct SettingsView: View {
                 Section("App") {
                     Picker("Color scheme", systemImage: "sun.max", selection: $colorScheme) {
                         ForEach(ColorScheme.allCases, id: \.self) { colorScheme in
-                            Text(colorScheme.rawValue.capitalized)
+                            Text(String(colorScheme.hashValue))
                         }
                     }
                     .foregroundStyle(.primary)
@@ -47,10 +41,11 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
+            .preferredColorScheme(colorScheme)
         }
     }
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(colorScheme: .constant(.light))
 }
