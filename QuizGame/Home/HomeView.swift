@@ -30,11 +30,12 @@ struct HomeView: View {
         }
         .sheet(isPresented: $shouldPresentConfigSheet) {
             SettingsView(
-                numberOfQuestions: $viewModel.numberOfQuestions,
                 colorScheme: Binding(
                     get: { colorScheme },
                     set: { alteredColorScheme = $0 }
-                )
+                ),
+                gptModel: $viewModel.gptModel,
+                numberOfQuestions: $viewModel.numberOfQuestions
             )
         }
         .environmentObject(viewModel)

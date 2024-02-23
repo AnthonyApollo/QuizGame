@@ -9,9 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    @Binding var numberOfQuestions: Int
-    @State private var gptModel: GPTModel = .gpt4
     @Binding var colorScheme: ColorScheme
+    @Binding var gptModel: GPTModel
+    @Binding var numberOfQuestions: Int
 
     var body: some View {
         NavigationStack {
@@ -48,5 +48,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(numberOfQuestions: .constant(5), colorScheme: .constant(.light))
+    SettingsView(colorScheme: .constant(.light), gptModel: .constant(.gpt3), numberOfQuestions: .constant(5))
 }
