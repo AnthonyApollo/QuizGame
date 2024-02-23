@@ -29,10 +29,13 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $shouldPresentConfigSheet) {
-            SettingsView(colorScheme: Binding(
-                get: { colorScheme },
-                set: { alteredColorScheme = $0 }
-            ))
+            SettingsView(
+                numberOfQuestions: $viewModel.numberOfQuestions,
+                colorScheme: Binding(
+                    get: { colorScheme },
+                    set: { alteredColorScheme = $0 }
+                )
+            )
         }
         .environmentObject(viewModel)
         .preferredColorScheme(alteredColorScheme ?? colorScheme)

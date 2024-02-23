@@ -12,8 +12,12 @@ struct NewGameRequest: Requestable {
     let parameters: QueryParameters? = nil
     let path: String = "chat/completions"
 
-    init(gameTheme: String) {
-        body = OpenAIChatRequest(gameTheme: gameTheme)
+    init(
+        gameTheme: String,
+        numberOfQuestions: Int
+    ) {
+        body = OpenAIChatRequest(gameTheme: gameTheme,
+                                 numberOfQuestions: numberOfQuestions)
     }
 }
 
@@ -23,11 +27,14 @@ struct OpenAIChatRequest: Encodable {
     let stream = false
     let responseFormat = OpenAIResponseFormat()
 
-    init(gameTheme: String) {
+    init(
+        gameTheme: String,
+        numberOfQuestions: Int
+    ) {
         messages = [
             .init(
                 role: "system",
-                content: "You are a quiz game assistant that generates a new game based on the theme chosen by the user. You output the game in JSON format following this schema {\"type\":\"object\",\"properties\":{\"theme\":{\"type\":\"string\"},\"questions\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\"},\"topic\":{\"type\":\"string\"},\"question\":{\"type\":\"string\"},\"answers\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"correctAnswer\":{\"type\":\"string\"}},\"required\":[\"id\",\"topic\",\"question\",\"answers\",\"correctAnswer\"]}}},\"required\":[\"theme\",\"questions\"]}. The game should have 5 questions of increasing difficulty. Questions should have only 1 correct answer."
+                content: "You are a quiz game assistant that generates a new game based on the theme chosen by the user. You output the game in JSON format following this schema {\"type\":\"object\",\"properties\":{\"theme\":{\"type\":\"string\"},\"questions\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"integer\"},\"topic\":{\"type\":\"string\"},\"question\":{\"type\":\"string\"},\"answers\":{\"type\":\"array\",\"items\":{\"type\":\"string\"}},\"correctAnswer\":{\"type\":\"string\"}},\"required\":[\"id\",\"topic\",\"question\",\"answers\",\"correctAnswer\"]}}},\"required\":[\"theme\",\"questions\"]}. The game should have \(numberOfQuestions) questions of increasing difficulty. Questions should have only 1 correct answer."
             ),
             .init(
                 role: "user",

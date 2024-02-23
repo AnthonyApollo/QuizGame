@@ -9,7 +9,7 @@ import Combine
 
 struct NewGameRepositoryStub: NewGameRepositoryProtocol {
     
-    func createGame(withTheme theme: String) -> AnyPublisher<GeneratedGame, Error> {
+    func createGame(withTheme theme: String, numberOfQuestions: Int) -> AnyPublisher<GeneratedGame, Error> {
         Just(GeneratedGame.fixture())
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    @State private var numberOfQuestions = 5
+    @Binding var numberOfQuestions: Int
     @State private var gptModel: GPTModel = .gpt4
     @Binding var colorScheme: ColorScheme
 
@@ -48,5 +48,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(colorScheme: .constant(.light))
+    SettingsView(numberOfQuestions: .constant(5), colorScheme: .constant(.light))
 }
