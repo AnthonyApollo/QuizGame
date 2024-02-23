@@ -31,7 +31,7 @@ struct SettingsView: View {
                 }
 
                 Section("App") {
-                    Picker("Color scheme", systemImage: "sun.max", selection: $colorScheme) {
+                    Picker("Color scheme", systemImage: colorScheme.iconSystemName, selection: $colorScheme) {
                         ForEach(ColorScheme.allCases, id: \.self) { colorScheme in
                             Text(colorScheme.title)
                         }

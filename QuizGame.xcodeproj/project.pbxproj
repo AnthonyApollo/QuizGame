@@ -10,7 +10,7 @@
 		150790192B7D38A300482CAF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150790182B7D38A300482CAF /* SettingsView.swift */; };
 		150C5C792AE5E4F40092B219 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150C5C782AE5E4F40092B219 /* HomeView.swift */; };
 		151380F92B7BBBD500A0FBCA /* NewGameRepositoryStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151380F82B7BBBD500A0FBCA /* NewGameRepositoryStub.swift */; };
-		1525B6232B883CBE002F2413 /* ColorScheme+Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525B6222B883CBE002F2413 /* ColorScheme+Title.swift */; };
+		1525B6292B884AF1002F2413 /* ColorScheme+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1525B6282B884AF1002F2413 /* ColorScheme+Settings.swift */; };
 		153CE99B2B474E42000FEC3D /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153CE99A2B474E42000FEC3D /* APIConstants.swift */; };
 		1548F58E2B487B6F0050B29B /* OpenAIRequestMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548F58D2B487B6F0050B29B /* OpenAIRequestMapper.swift */; };
 		1556198E2B462B02001A15C0 /* NewGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1556198D2B462B02001A15C0 /* NewGameView.swift */; };
@@ -55,7 +55,7 @@
 		150790182B7D38A300482CAF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		150C5C782AE5E4F40092B219 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		151380F82B7BBBD500A0FBCA /* NewGameRepositoryStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameRepositoryStub.swift; sourceTree = "<group>"; };
-		1525B6222B883CBE002F2413 /* ColorScheme+Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorScheme+Title.swift"; sourceTree = "<group>"; };
+		1525B6282B884AF1002F2413 /* ColorScheme+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorScheme+Settings.swift"; sourceTree = "<group>"; };
 		153CE99A2B474E42000FEC3D /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		1548F58D2B487B6F0050B29B /* OpenAIRequestMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIRequestMapper.swift; sourceTree = "<group>"; };
 		1556198D2B462B02001A15C0 /* NewGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameView.swift; sourceTree = "<group>"; };
@@ -110,8 +110,8 @@
 		150C5C772AE5E4BD0092B219 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1525B6272B884ADC002F2413 /* Settings */,
 				150C5C782AE5E4F40092B219 /* HomeView.swift */,
-				150790182B7D38A300482CAF /* SettingsView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -124,10 +124,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		1525B6212B883CA5002F2413 /* Extensions */ = {
+		1525B6272B884ADC002F2413 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				1525B6222B883CBE002F2413 /* ColorScheme+Title.swift */,
+				1525B62A2B884B1E002F2413 /* Extensions */,
+				150790182B7D38A300482CAF /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		1525B62A2B884B1E002F2413 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1525B6282B884AF1002F2413 /* ColorScheme+Settings.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -135,7 +144,6 @@
 		155619912B463691001A15C0 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				1525B6212B883CA5002F2413 /* Extensions */,
 				1525B6202B883C99002F2413 /* Views */,
 			);
 			path = Shared;
@@ -386,7 +394,6 @@
 				150790192B7D38A300482CAF /* SettingsView.swift in Sources */,
 				151380F92B7BBBD500A0FBCA /* NewGameRepositoryStub.swift in Sources */,
 				156CCEDD2B55FAAB00D430C9 /* QuestionView.swift in Sources */,
-				1525B6232B883CBE002F2413 /* ColorScheme+Title.swift in Sources */,
 				15FD24892AE5C38400CF5B11 /* QuizGameApp.swift in Sources */,
 				15B8CB3C2B4716FB00825E3C /* NewGameViewModel.swift in Sources */,
 				156D5E622AE742AB00E166B1 /* Game.swift in Sources */,
@@ -395,6 +402,7 @@
 				15B8CB442B471F2400825E3C /* NewGameRequest.swift in Sources */,
 				150C5C792AE5E4F40092B219 /* HomeView.swift in Sources */,
 				159F89DB2B7468F3005B4D9C /* QuestionsView.swift in Sources */,
+				1525B6292B884AF1002F2413 /* ColorScheme+Settings.swift in Sources */,
 				15B8CB422B471E6E00825E3C /* CombineHTTPClient.swift in Sources */,
 				153CE99B2B474E42000FEC3D /* APIConstants.swift in Sources */,
 				15B8CB3F2B47184A00825E3C /* NewGameRepository.swift in Sources */,
