@@ -33,7 +33,7 @@ struct SettingsView: View {
                 Section("App") {
                     Picker("Color scheme", systemImage: "sun.max", selection: $colorScheme) {
                         ForEach(ColorScheme.allCases, id: \.self) { colorScheme in
-                            Text(String(colorScheme.hashValue))
+                            Text(colorScheme.title)
                         }
                     }
                     .foregroundStyle(.primary)
@@ -44,6 +44,7 @@ struct SettingsView: View {
             .preferredColorScheme(colorScheme)
         }
     }
+
 }
 
 #Preview {

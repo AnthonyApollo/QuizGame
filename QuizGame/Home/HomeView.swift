@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var viewModel = NewGameViewModel()
-    @State var shouldPresentConfigSheet = false
+    @StateObject private var viewModel = NewGameViewModel()
+    @State private var shouldPresentConfigSheet = false
     @State private var navigationPath: [String] = []
-    @State private var colorScheme: ColorScheme = .dark
+    @Environment(\.colorScheme) private var colorScheme
+    @State private var alteredColorScheme: ColorScheme?
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -28,10 +29,13 @@ struct HomeView: View {
             }
         }
         .sheet(isPresented: $shouldPresentConfigSheet) {
-            SettingsView(colorScheme: $colorScheme)
+            SettingsView(colorScheme: Binding(
+                get: { colorScheme },
+                set: { alteredColorScheme = $0 }
+            ))
         }
         .environmentObject(viewModel)
-        .preferredColorScheme(colorScheme)
+        .preferredColorScheme(alteredColorScheme ?? colorScheme)
     }
 }
 
