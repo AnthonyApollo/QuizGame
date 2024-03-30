@@ -49,7 +49,6 @@ final class NewGameViewModel: NewGameViewModelProtocol {
 
     func cancel() {
         subscriptions.forEach { $0.cancel() }
-        clearGame()
     }
 
     func clearGame() {
