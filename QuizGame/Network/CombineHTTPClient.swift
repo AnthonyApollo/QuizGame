@@ -57,7 +57,7 @@ extension CombineHTTPClient: CombineHTTPClientProtocol {
     func requestJSON<T: Decodable>(for requestable: Requestable) -> AnyPublisher<T, Error> {
         do {
             let urlRequest = try requestMapper.map(requestable)
-            return urlSession.dataTaskPublisher(for: urlRequest)
+            return request(urlRequest)
                 .map(\.data)
                 .decode(type: T.self, decoder: decoder)
                 .eraseToAnyPublisher()
