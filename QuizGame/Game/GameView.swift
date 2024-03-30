@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct GameView: View {
-    @EnvironmentObject var viewModel: NewGameViewModel
+struct GameView<ViewModel: NewGameViewModelProtocol>: View {
+    @EnvironmentObject var viewModel: ViewModel
 
     var body: some View {
         if let generatedGame = viewModel.generatedGame {
@@ -38,7 +38,7 @@ struct LoadingGameView: View {
 
 struct GeneratedGameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView()
+        GameView<NewGameViewModel>()
             .environmentObject(NewGameViewModel(repository: NewGameRepositoryStub()))
     }
 }

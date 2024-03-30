@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct NewGameView: View {
-    @EnvironmentObject var viewModel: NewGameViewModel
+struct NewGameView<ViewModel: NewGameViewModelProtocol>: View {
+    @EnvironmentObject var viewModel: ViewModel
     var confirmAction: (() -> Void)?
 
     var body: some View {
@@ -45,7 +45,7 @@ struct NewGameView: View {
 
 struct NewGameView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGameView()
+        NewGameView<NewGameViewModel>()
             .environmentObject(NewGameViewModel(repository: NewGameRepositoryStub()))
     }
 }

@@ -8,7 +8,18 @@
 import Foundation
 import Combine
 
-final class NewGameViewModel: ObservableObject {
+internal protocol NewGameViewModelProtocol: ObservableObject {
+    var gameTheme: String { get set }
+    var generatedGame: GeneratedGame? { get set }
+    var numberOfQuestions: Int { get set }
+    var gptModel: GPTModel { get set }
+
+    func createGame()
+    func cancel()
+    func clearGame()
+}
+
+final class NewGameViewModel: NewGameViewModelProtocol {
     @Published var gameTheme: String = ""
     @Published var generatedGame: GeneratedGame?
     @Published var numberOfQuestions: Int = 5

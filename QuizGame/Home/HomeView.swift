@@ -16,7 +16,7 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            NewGameView() {
+            NewGameView<NewGameViewModel>() {
                 navigationPath.append("game")
             }
             .toolbar {
@@ -25,7 +25,7 @@ struct HomeView: View {
                 }
             }
             .navigationDestination(for: String.self) { _ in
-                GameView()
+                GameView<NewGameViewModel>()
             }
         }
         .sheet(isPresented: $shouldPresentConfigSheet) {
