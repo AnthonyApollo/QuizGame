@@ -21,6 +21,9 @@ struct GameView<ViewModel: NewGameViewModelProtocol>: View {
                 .onAppear {
                     viewModel.createGame()
                 }
+                .onDisappear {
+                    viewModel.cancel()
+                }
         }
     }
 }
