@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 internal protocol NewGameViewModelProtocol: ObservableObject {
+    var errorMessage: String? { get }
     var gameTheme: String { get set }
     var generatedGame: GeneratedGame? { get set }
     var numberOfQuestions: Int { get set }
@@ -20,6 +21,7 @@ internal protocol NewGameViewModelProtocol: ObservableObject {
 }
 
 final class NewGameViewModel: NewGameViewModelProtocol {
+    @Published var errorMessage: String?
     @Published var gameTheme: String = ""
     @Published var generatedGame: GeneratedGame?
     @Published var numberOfQuestions: Int = 5
@@ -39,7 +41,7 @@ final class NewGameViewModel: NewGameViewModelProtocol {
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 if case .failure = completion {
-                    // TODO: Handle error
+                    self.errorMessage = "Error generating game"
                 }
             } receiveValue: { generatedGame in
                 self.generatedGame = generatedGame
