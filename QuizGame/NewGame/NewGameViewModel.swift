@@ -25,7 +25,7 @@ final class NewGameViewModel: NewGameViewModelProtocol {
     @Published var gameTheme: String = ""
     @Published var generatedGame: GeneratedGame?
     @Published var numberOfQuestions: Int = 5
-    @Published var gptModel: GPTModel = .gpt3
+    @Published var gptModel: GPTModel = .gpt4
 
     private let repository: NewGameRepositoryProtocol
     private var subscriptions = Set<AnyCancellable>()
