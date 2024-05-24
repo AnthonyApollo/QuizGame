@@ -9,6 +9,7 @@ import SwiftUI
 
 struct QuestionsView<ViewModel: GameViewModelProtocol>: View {
     @ObservedObject var viewModel: ViewModel
+    @State private var currentQuestion = 1
 
     var body: some View {
         NavigationStack {
@@ -32,6 +33,7 @@ struct QuestionsView<ViewModel: GameViewModelProtocol>: View {
                                 withAnimation {
                                     scrollView.scrollTo(viewModel.nextQuestionId, anchor: .leading)
                                 }
+                                currentQuestion += 1
                             } label: {
                                 VStack {
                                     Text("Next")
@@ -44,7 +46,7 @@ struct QuestionsView<ViewModel: GameViewModelProtocol>: View {
                     }
                 }
             }
-            .navigationTitle(viewModel.generatedGame.theme)
+            .navigationTitle("\(viewModel.generatedGame.theme) \(currentQuestion)/\(viewModel.generatedGame.questions.count)")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
