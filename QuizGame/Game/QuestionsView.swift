@@ -7,32 +7,49 @@
 
 import SwiftUI
 
-struct QuestionsView: View {
-    var generatedGame: GeneratedGame
+struct QuestionsView<ViewModel: GameViewModelProtocol>: View {
+    @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        GeometryReader { proxy in
-            ScrollViewReader { scrollView in
-                ScrollView([.vertical], showsIndicators: false) {
-                    LazyVStack {
-                        ForEach(generatedGame.questions, id: \.id) { question in
-                            QuestionView(generatedQuestion: question, hasNextQuestion: question.id + 1 <= generatedGame.questions.count) {
-                                withAnimation {
-                                    scrollView.scrollTo(question.id + 1, anchor: .leading)
+        NavigationStack {
+            GeometryReader { proxy in
+                ScrollViewReader { scrollView in
+                    VStack {
+                        ScrollView([.vertical], showsIndicators: false) {
+                            LazyVStack {
+                                ForEach(viewModel.generatedGame.questions, id: \.id) { question in
+                                    QuestionView(viewModel: viewModel, generatedQuestion: question)
+                                        .frame(height: proxy.size.height)
+                                        .id(question.id)
                                 }
                             }
-                            .frame(height: proxy.size.height)
-                            .id(question.id)
+                        }
+                        .scrollDisabled(true)
+
+                        if viewModel.shouldDisplayNextButton {
+                            Button {
+                                viewModel.didScrollToNextQuestion()
+                                withAnimation {
+                                    scrollView.scrollTo(viewModel.nextQuestionId, anchor: .leading)
+                                }
+                            } label: {
+                                VStack {
+                                    Text("Next")
+                                    Image(systemName: "arrow.down")
+                                }
+                            }
+                        } else {
+                            Spacer()
                         }
                     }
                 }
-                .scrollDisabled(true)
             }
+            .navigationTitle(viewModel.generatedGame.theme)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationTitle(generatedGame.theme)
     }
 }
 
 #Preview {
-    QuestionsView(generatedGame: .fixture())
+    QuestionsView(viewModel: GameViewModel(generatedGame: .fixture()))
 }

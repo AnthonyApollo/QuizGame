@@ -7,62 +7,71 @@
 
 import SwiftUI
 
-struct QuestionView: View {
+struct QuestionView<ViewModel: GameViewModelProtocol>: View {
+    let viewModel: ViewModel
     var generatedQuestion: GeneratedQuestion
-    var hasNextQuestion: Bool
-    var nextQuestionAction: () -> Void
-    @State private var selectedAnswer: String?
-    @State private var isQuestionAnswered: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
             Text(generatedQuestion.topic)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
-                .padding(.bottom, 12)
+                .padding(.bottom)
 
             Text(generatedQuestion.question)
                 .font(.title2)
                 .bold()
+                .padding(.bottom)
 
-            VStack(alignment: .leading) {
-                ForEach(generatedQuestion.answers, id: \.self) { answer in
-                    HStack(alignment: .center) {
-                        Button(answer) {
-                            selectedAnswer = answer
-                        }
-                        .padding(.bottom, 12)
-                        .buttonStyle(.borderedProminent)
-                        .font(.title3)
-                        .cornerRadius(10)
-                        .tint(getColor(by: answer, isSelected: selectedAnswer == answer))
-
-                        if selectedAnswer == answer && !isQuestionAnswered {
-                            Button {
-                                isQuestionAnswered = true
-                            } label: {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .font(.title)
-                            }
-                        }
-                    }
-                }
-            }
+            AlternativesView(viewModel: viewModel, generatedQuestion: generatedQuestion)
 
             Spacer()
                 .frame(maxWidth: .infinity)
-
-            if isQuestionAnswered && hasNextQuestion {
-                Button {
-                    nextQuestionAction()
-                } label: {
-                    Text("Next")
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-            }
         }
         .padding()
+    }
+}
+
+struct AlternativesView<ViewModel: GameViewModelProtocol>: View {
+    let viewModel: ViewModel
+    var generatedQuestion: GeneratedQuestion
+
+    @State private var selectedAnswer: String?
+    @State private var isQuestionAnswered: Bool = false
+    @State private var isRightAnswer: Bool = false
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            ForEach(generatedQuestion.answers, id: \.self) { answer in
+                HStack(alignment: .center) {
+                    Button(answer) {
+                        guard isQuestionAnswered else {
+                            selectedAnswer = answer
+                            return
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                    .font(.title3)
+                    .tint(getColor(by: answer, isSelected: selectedAnswer == answer))
+
+                    if selectedAnswer == answer && !isQuestionAnswered {
+                        Button {
+                            isRightAnswer = viewModel.didAnswer(questionID: generatedQuestion.id, answer: answer)
+                            isQuestionAnswered = true
+                        } label: {
+                            Image(systemName: "checkmark.circle.fill")
+                                .font(.title)
+                        }
+                    }
+
+                    if selectedAnswer == answer && isQuestionAnswered {
+                        Image(systemName: isRightAnswer ? "checkmark" : "xmark")
+                            .foregroundStyle(isRightAnswer ? Color.green : Color.red)
+                    }
+                }
+                .padding(.bottom)
+            }
+        }
     }
 
     private func getColor(by answer: String, isSelected: Bool) -> Color {
@@ -74,8 +83,7 @@ struct QuestionView: View {
     }
 }
 
-struct QuestionView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuestionView(generatedQuestion: GeneratedGame.fixture().questions.first!, hasNextQuestion: true) {}
-    }
+#Preview {
+    QuestionView(viewModel: GameViewModel(generatedGame: .fixture()),
+                 generatedQuestion: GeneratedGame.fixture().questions.first!)
 }

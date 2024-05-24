@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-internal protocol NewGameViewModelProtocol: ObservableObject {
+protocol NewGameViewModelProtocol: ObservableObject {
     var errorMessage: String? { get }
     var gameTheme: String { get set }
     var generatedGame: GeneratedGame? { get set }

@@ -14,7 +14,8 @@ struct GameView<ViewModel: NewGameViewModelProtocol>: View {
         if let errorMessage = viewModel.errorMessage {
             GenerationErrorView(errorMessage: errorMessage)
         } else if let generatedGame = viewModel.generatedGame {
-            QuestionsView(generatedGame: generatedGame)
+            let gameViewModel = GameViewModel(generatedGame: generatedGame)
+            QuestionsView(viewModel: gameViewModel)
                 .onDisappear {
                     viewModel.clearGame()
                 }
@@ -38,9 +39,7 @@ struct LoadingGameView: View {
     }
 }
 
-struct GeneratedGameView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameView<NewGameViewModel>()
-            .environmentObject(NewGameViewModel(repository: NewGameRepositoryStub()))
-    }
+#Preview {
+    GameView<NewGameViewModel>()
+        .environmentObject(NewGameViewModel(repository: NewGameRepositoryStub()))
 }
