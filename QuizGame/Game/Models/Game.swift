@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct GeneratedGame: Decodable {
+struct GeneratedGame: Decodable, Equatable {
     let theme: String
     let questions: [GeneratedQuestion]
 }
 
-struct GeneratedQuestion: Decodable, Identifiable {
+struct GeneratedQuestion: Decodable, Identifiable, Equatable {
     let id: Int
     let topic: String
     let question: String
