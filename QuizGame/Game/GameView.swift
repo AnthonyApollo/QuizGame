@@ -11,22 +11,22 @@ struct GameView: View {
     @State var viewModel: NewGameViewModelProtocol
 
     var body: some View {
-        if let errorMessage = viewModel.errorMessage {
-            GenerationErrorView(errorMessage: errorMessage)
-        } else if let generatedGame = viewModel.generatedGame {
-            let gameViewModel = GameViewModel(generatedGame: generatedGame)
-            QuestionsView(viewModel: gameViewModel)
-                .onDisappear {
-                    viewModel.clearGame()
-                }
-        } else {
-            LoadingGameView()
-                .onAppear {
-                    viewModel.createGame()
-                }
-                .onDisappear {
-                    viewModel.cancel()
-                }
+        Group {
+            if let errorMessage = viewModel.errorMessage {
+                GenerationErrorView(errorMessage: errorMessage)
+            } else if let generatedGame = viewModel.generatedGame {
+                let gameViewModel = GameViewModel(generatedGame: generatedGame)
+                QuestionsView(viewModel: gameViewModel)
+            } else {
+                LoadingGameView()
+            }
+        }
+        .onAppear {
+            viewModel.createGame()
+        }
+        .onDisappear {
+            viewModel.clearGame()
+            viewModel.cancel()
         }
     }
 }
