@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameView: View {
     @State var viewModel: NewGameViewModelProtocol
+    @State var gameViewModel: GameViewModelProtocol?
 
     var body: some View {
         GeometryReader { geometryProxy in
@@ -17,9 +18,18 @@ struct GameView: View {
                     .frame(width: geometryProxy.size.width, height: geometryProxy.size.height)
             } else if let generatedGame = viewModel.generatedGame {
                 let gameViewModel = GameViewModel(generatedGame: generatedGame)
-                QuestionsView(viewModel: gameViewModel)
-                    .frame(width: geometryProxy.size.width, height: geometryProxy.size.height)
-                    .transition(.move(edge: .bottom))
+                if self.gameViewModel?.isGameFinished == true {
+                    ResultView(rightAnswers: self.gameViewModel!.rightAnswers, wrongAnswers: self.gameViewModel!.wrongAnswers)
+                        .frame(width: geometryProxy.size.width, height: geometryProxy.size.height)
+                        .transition(.move(edge: .bottom))
+                } else {
+                    QuestionsView(viewModel: gameViewModel)
+                        .frame(width: geometryProxy.size.width, height: geometryProxy.size.height)
+                        .transition(.asymmetric(insertion: .move(edge: .bottom), removal: .move(edge: .top)))
+                        .onAppear {
+                            self.gameViewModel = gameViewModel
+                        }
+                }
             } else {
                 LoadingGameView()
                     .frame(width: geometryProxy.size.width, height: geometryProxy.size.height)
@@ -27,6 +37,7 @@ struct GameView: View {
         }
         .animation(.default, value: viewModel.errorMessage)
         .animation(.easeInOut, value: viewModel.generatedGame)
+        .animation(.easeInOut, value: gameViewModel?.isGameFinished)
         .onAppear {
             viewModel.createGame()
         }

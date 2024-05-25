@@ -9,8 +9,11 @@ import SwiftUI
 
 protocol GameViewModelProtocol {
     var generatedGame: GeneratedGame { get }
+    var isGameFinished: Bool { get }
     var nextQuestionId: Int { get }
+    var rightAnswers: Int { get }
     var shouldDisplayNextButton: Bool { get }
+    var wrongAnswers: Int { get }
 
     func didAnswer(questionID: Int, answer: String) -> Bool
     func didScrollToNextQuestion()
@@ -20,8 +23,10 @@ protocol GameViewModelProtocol {
 
     private var answeredQuestions = 0
     let generatedGame: GeneratedGame
+    var isGameFinished: Bool = false
     var nextQuestionId: Int = 0
-    private var rightAnswers = 0
+    var rightAnswers = 0
+    var wrongAnswers = 0
     var shouldDisplayNextButton = false
 
     @ObservationIgnored
@@ -36,12 +41,15 @@ protocol GameViewModelProtocol {
     func didAnswer(questionID: Int, answer: String) -> Bool {
         answeredQuestions += 1
 
+        isGameFinished = answeredQuestions == questions.count
         shouldDisplayNextButton = answeredQuestions != questions.count
         nextQuestionId = questionID + 1
 
         let question = questions[questionID]
         if question?.correctAnswer == answer {
             rightAnswers += 1
+        } else {
+            wrongAnswers += 1
         }
 
         return question?.correctAnswer == answer

@@ -54,6 +54,7 @@ protocol NewGameViewModelProtocol {
     }
 
     func clearGame() {
+        errorMessage = nil
         generatedGame = nil
     }
 
