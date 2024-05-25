@@ -17,7 +17,7 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack {
-            NewGameView() {
+            NewGameView(viewModel: viewModel) {
                 shouldPresentGameSheet.toggle()
             }
             .toolbar {
@@ -37,15 +37,12 @@ struct HomeView: View {
             )
         }
         .sheet(isPresented: $shouldPresentGameSheet) {
-            GameView()
+            GameView(viewModel: viewModel)
         }
-        .environment(viewModel)
         .preferredColorScheme(alteredColorScheme ?? colorScheme)
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
+#Preview {
+    HomeView()
 }
