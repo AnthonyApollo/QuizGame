@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol GameViewModelProtocol: ObservableObject {
+protocol GameViewModelProtocol {
     var generatedGame: GeneratedGame { get }
     var nextQuestionId: Int { get }
     var shouldDisplayNextButton: Bool { get }
@@ -16,14 +16,15 @@ protocol GameViewModelProtocol: ObservableObject {
     func didScrollToNextQuestion()
 }
 
-final class GameViewModel: GameViewModelProtocol {
+@Observable final class GameViewModel: GameViewModelProtocol {
 
     private var answeredQuestions = 0
     let generatedGame: GeneratedGame
     var nextQuestionId: Int = 0
     private var rightAnswers = 0
-    @Published var shouldDisplayNextButton = false
+    var shouldDisplayNextButton = false
 
+    @ObservationIgnored
     private lazy var questions: [Int: GeneratedQuestion] = {
         Dictionary<Int, Any>.from(generatedGame.questions, keyPath: \.id)
     }()

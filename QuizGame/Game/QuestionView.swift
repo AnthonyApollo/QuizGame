@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct QuestionView<ViewModel: GameViewModelProtocol>: View {
-    let viewModel: ViewModel
+struct QuestionView: View {
+    let viewModel: GameViewModelProtocol
     var generatedQuestion: GeneratedQuestion
 
     var body: some View {
@@ -32,8 +32,8 @@ struct QuestionView<ViewModel: GameViewModelProtocol>: View {
     }
 }
 
-struct AlternativesView<ViewModel: GameViewModelProtocol>: View {
-    let viewModel: ViewModel
+struct AlternativesView: View {
+    let viewModel: GameViewModelProtocol
     var generatedQuestion: GeneratedQuestion
 
     @State private var selectedAnswer: String?

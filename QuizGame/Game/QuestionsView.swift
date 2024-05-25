@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct QuestionsView<ViewModel: GameViewModelProtocol>: View {
-    @ObservedObject var viewModel: ViewModel
+struct QuestionsView: View {
+    @State var viewModel: GameViewModelProtocol
     @State private var currentQuestion = 1
 
     var body: some View {
