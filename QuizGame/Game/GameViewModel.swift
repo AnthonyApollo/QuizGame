@@ -18,11 +18,11 @@ protocol GameViewModelProtocol: ObservableObject {
 
 final class GameViewModel: GameViewModelProtocol {
 
+    private var answeredQuestions = 0
     let generatedGame: GeneratedGame
     var nextQuestionId: Int = 0
-    @Published var shouldDisplayNextButton = false
     private var rightAnswers = 0
-    private var answeredQuestions = 0
+    @Published var shouldDisplayNextButton = false
 
     private lazy var questions: [Int: GeneratedQuestion] = {
         Dictionary<Int, Any>.from(generatedGame.questions, keyPath: \.id)
