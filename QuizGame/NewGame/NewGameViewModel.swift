@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-protocol NewGameViewModelProtocol: ObservableObject {
+protocol NewGameViewModelProtocol {
     var errorMessage: String? { get }
     var gameTheme: String { get set }
     var generatedGame: GeneratedGame? { get set }
@@ -20,12 +20,12 @@ protocol NewGameViewModelProtocol: ObservableObject {
     func clearGame()
 }
 
-final class NewGameViewModel: NewGameViewModelProtocol {
-    @Published var errorMessage: String?
-    @Published var gameTheme: String = ""
-    @Published var generatedGame: GeneratedGame?
-    @Published var numberOfQuestions: Int = 5
-    @Published var gptModel: GPTModel = .gpt4
+@Observable final class NewGameViewModel: NewGameViewModelProtocol {
+    var errorMessage: String?
+    var gameTheme: String = ""
+    var generatedGame: GeneratedGame?
+    var numberOfQuestions: Int = 5
+    var gptModel: GPTModel = .gpt4
 
     private let repository: NewGameRepositoryProtocol
     private var subscriptions = Set<AnyCancellable>()

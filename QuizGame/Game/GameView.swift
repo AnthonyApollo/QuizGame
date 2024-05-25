@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct GameView<ViewModel: NewGameViewModelProtocol>: View {
-    @EnvironmentObject var viewModel: ViewModel
+struct GameView: View {
+    @Environment(NewGameViewModel.self) var viewModel
 
     var body: some View {
         if let errorMessage = viewModel.errorMessage {
@@ -40,6 +40,6 @@ struct LoadingGameView: View {
 }
 
 #Preview {
-    GameView<NewGameViewModel>()
-        .environmentObject(NewGameViewModel(repository: NewGameRepositoryStub()))
+    GameView()
+        .environment(NewGameViewModel(repository: NewGameRepositoryStub()))
 }

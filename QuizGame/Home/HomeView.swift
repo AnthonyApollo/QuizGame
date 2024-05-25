@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var viewModel = NewGameViewModel()
+    @State private var viewModel = NewGameViewModel()
     @State private var shouldPresentGameSheet = false
     @State private var shouldPresentConfigSheet = false
     @State private var navigationPath: [String] = []
@@ -17,7 +17,7 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack {
-            NewGameView<NewGameViewModel>() {
+            NewGameView() {
                 shouldPresentGameSheet.toggle()
             }
             .toolbar {
@@ -37,9 +37,9 @@ struct HomeView: View {
             )
         }
         .sheet(isPresented: $shouldPresentGameSheet) {
-            GameView<NewGameViewModel>()
+            GameView()
         }
-        .environmentObject(viewModel)
+        .environment(viewModel)
         .preferredColorScheme(alteredColorScheme ?? colorScheme)
     }
 }

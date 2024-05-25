@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct NewGameView<ViewModel: NewGameViewModelProtocol>: View {
-    @EnvironmentObject var viewModel: ViewModel
+struct NewGameView: View {
+    @Environment(NewGameViewModel.self) var viewModel
     var confirmAction: (() -> Void)?
 
     var body: some View {
@@ -22,6 +22,7 @@ struct NewGameView<ViewModel: NewGameViewModelProtocol>: View {
             Spacer()
 
             HStack {
+                @Bindable var viewModel = viewModel
                 TextField("Rocket science", text: $viewModel.gameTheme)
                     .textFieldStyle(.roundedBorder)
 
@@ -45,7 +46,7 @@ struct NewGameView<ViewModel: NewGameViewModelProtocol>: View {
 
 struct NewGameView_Previews: PreviewProvider {
     static var previews: some View {
-        NewGameView<NewGameViewModel>()
-            .environmentObject(NewGameViewModel(repository: NewGameRepositoryStub()))
+        NewGameView()
+            .environment(NewGameViewModel(repository: NewGameRepositoryStub()))
     }
 }
