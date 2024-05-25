@@ -12,11 +12,13 @@ protocol GameViewModelProtocol {
     var isGameFinished: Bool { get }
     var nextQuestionId: Int { get }
     var rightAnswers: Int { get }
+    var shouldDisplayFinishButton: Bool { get }
     var shouldDisplayNextButton: Bool { get }
     var wrongAnswers: Int { get }
 
     func didAnswer(questionID: Int, answer: String) -> Bool
     func didScrollToNextQuestion()
+    func didSelectFinishGame()
 }
 
 @Observable final class GameViewModel: GameViewModelProtocol {
@@ -27,6 +29,7 @@ protocol GameViewModelProtocol {
     var nextQuestionId: Int = 0
     var rightAnswers = 0
     var wrongAnswers = 0
+    var shouldDisplayFinishButton = false
     var shouldDisplayNextButton = false
 
     @ObservationIgnored
@@ -41,7 +44,7 @@ protocol GameViewModelProtocol {
     func didAnswer(questionID: Int, answer: String) -> Bool {
         answeredQuestions += 1
 
-        isGameFinished = answeredQuestions == questions.count
+        shouldDisplayFinishButton = answeredQuestions == questions.count
         shouldDisplayNextButton = answeredQuestions != questions.count
         nextQuestionId = questionID + 1
 
@@ -57,6 +60,10 @@ protocol GameViewModelProtocol {
 
     func didScrollToNextQuestion() {
         shouldDisplayNextButton = false
+    }
+
+    func didSelectFinishGame() {
+        isGameFinished = true
     }
 
 }

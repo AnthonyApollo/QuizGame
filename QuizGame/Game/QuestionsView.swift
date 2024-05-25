@@ -40,6 +40,12 @@ struct QuestionsView: View {
                                     Image(systemName: "arrow.down")
                                 }
                             }
+                        } else if viewModel.shouldDisplayFinishButton {
+                            Button {
+                                viewModel.didSelectFinishGame()
+                            } label: {
+                                Text("Finish")
+                            }
                         } else {
                             Spacer()
                         }
