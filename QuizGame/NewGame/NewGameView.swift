@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewGameView: View {
     @State var viewModel: NewGameViewModelProtocol
-    var confirmAction: (() -> Void)?
+    @State private var shouldPresentGameSheet = false
 
     var body: some View {
         VStack {
@@ -26,7 +26,7 @@ struct NewGameView: View {
                     .textFieldStyle(.roundedBorder)
 
                 Button {
-                    confirmAction?()
+                    shouldPresentGameSheet.toggle()
                 } label: {
                     if viewModel.gameTheme.isEmpty {
                         Image(systemName: "arrow.up.circle")
@@ -39,6 +39,9 @@ struct NewGameView: View {
                 .animation(.default, value: viewModel.gameTheme.isEmpty)
             }
             .padding()
+        }
+        .sheet(isPresented: $shouldPresentGameSheet) {
+            GameView(viewModel: viewModel)
         }
     }
 }
