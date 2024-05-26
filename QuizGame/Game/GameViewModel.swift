@@ -23,8 +23,9 @@ protocol GameViewModelProtocol {
 
 @Observable final class GameViewModel: GameViewModelProtocol {
 
-    private var answeredQuestions = 0
     let generatedGame: GeneratedGame
+    let repository: GameRepositoryProtocol
+
     var isGameFinished: Bool = false
     var nextQuestionId: Int = 0
     var rightAnswers = 0
@@ -37,25 +38,35 @@ protocol GameViewModelProtocol {
         Dictionary<Int, Any>.from(generatedGame.questions, keyPath: \.id)
     }()
 
-    init(generatedGame: GeneratedGame) {
+    private var answeredQuestions: [AnsweredQuestion] = []
+
+    init(
+        generatedGame: GeneratedGame,
+        repository: GameRepositoryProtocol
+    ) {
         self.generatedGame = generatedGame
+        self.repository = repository
     }
 
     func didAnswer(questionID: Int, answer: String) -> Bool {
-        answeredQuestions += 1
+        guard let question = questions[questionID] else {
+            return false
+        }
 
-        shouldDisplayFinishButton = answeredQuestions == questions.count
-        shouldDisplayNextButton = answeredQuestions != questions.count
-        nextQuestionId = questionID + 1
-
-        let question = questions[questionID]
-        if question?.correctAnswer == answer {
+        let isRightAnswer = question.correctAnswer == answer
+        if isRightAnswer {
             rightAnswers += 1
         } else {
             wrongAnswers += 1
         }
 
-        return question?.correctAnswer == answer
+        answeredQuestions.append(.init(generatedQuestion: question, selectedAnswer: answer))
+
+        nextQuestionId = questionID + 1
+        shouldDisplayFinishButton = answeredQuestions.count == questions.count
+        shouldDisplayNextButton = answeredQuestions.count != questions.count
+
+        return isRightAnswer
     }
 
     func didScrollToNextQuestion() {
@@ -64,6 +75,13 @@ protocol GameViewModelProtocol {
 
     func didSelectFinishGame() {
         isGameFinished = true
+
+        let playedGame = PreviousGame(theme: generatedGame.theme,
+                                      rightAnswers: rightAnswers,
+                                      wrongAnswers: wrongAnswers,
+                                      questions: answeredQuestions)
+
+        repository.save(game: playedGame)
     }
 
 }

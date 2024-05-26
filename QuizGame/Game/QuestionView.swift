@@ -84,6 +84,6 @@ struct AlternativesView: View {
 }
 
 #Preview {
-    QuestionView(viewModel: GameViewModel(generatedGame: .fixture()),
+    QuestionView(viewModel: GameViewModel(generatedGame: .fixture(), repository: GameRepositoryStub()),
                  generatedQuestion: GeneratedGame.fixture().questions.first!)
 }

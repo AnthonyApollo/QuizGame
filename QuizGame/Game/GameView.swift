@@ -10,6 +10,7 @@ import SwiftUI
 struct GameView: View {
     @State var viewModel: NewGameViewModelProtocol
     @State var gameViewModel: GameViewModelProtocol?
+    @Environment(\.modelContext) var modelContext
 
     var body: some View {
         GeometryReader { geometryProxy in
@@ -17,7 +18,9 @@ struct GameView: View {
                 GenerationErrorView(errorMessage: errorMessage)
                     .frame(width: geometryProxy.size.width, height: geometryProxy.size.height)
             } else if let generatedGame = viewModel.generatedGame {
-                let gameViewModel = GameViewModel(generatedGame: generatedGame)
+                let gameRepository = GameRepository(modelContext: modelContext)
+                let gameViewModel = GameViewModel(generatedGame: generatedGame,
+                                                  repository: gameRepository)
                 if self.gameViewModel?.isGameFinished == true {
                     ResultView(rightAnswers: self.gameViewModel!.rightAnswers, wrongAnswers: self.gameViewModel!.wrongAnswers)
                         .frame(width: geometryProxy.size.width, height: geometryProxy.size.height)

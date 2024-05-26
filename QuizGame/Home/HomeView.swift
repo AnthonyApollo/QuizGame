@@ -15,23 +15,33 @@ struct HomeView: View {
     @State private var alteredColorScheme: ColorScheme?
 
     var body: some View {
-        NavigationStack {
-            NewGameView(viewModel: viewModel)
-            .toolbar {
-                ConfigToolbarItem {
-                    shouldPresentConfigSheet.toggle()
+        TabView {
+            NavigationStack {
+                NewGameView(viewModel: viewModel)
+                    .toolbar {
+                        ConfigToolbarItem {
+                            shouldPresentConfigSheet.toggle()
+                        }
+                    }
+                    .sheet(isPresented: $shouldPresentConfigSheet) {
+                        SettingsView(
+                            colorScheme: Binding(
+                                get: { colorScheme },
+                                set: { alteredColorScheme = $0 }
+                            ),
+                            gptModel: $viewModel.gptModel,
+                            numberOfQuestions: $viewModel.numberOfQuestions
+                        )
                 }
             }
-        }
-        .sheet(isPresented: $shouldPresentConfigSheet) {
-            SettingsView(
-                colorScheme: Binding(
-                    get: { colorScheme },
-                    set: { alteredColorScheme = $0 }
-                ),
-                gptModel: $viewModel.gptModel,
-                numberOfQuestions: $viewModel.numberOfQuestions
-            )
+            .tabItem {
+                Label("New Game", systemImage: "arcade.stick.console")
+            }
+
+            PreviousGamesView()
+                .tabItem {
+                    Label("Previous Games", systemImage: "clock.arrow.2.circlepath")
+                }
         }
         .preferredColorScheme(alteredColorScheme ?? colorScheme)
     }

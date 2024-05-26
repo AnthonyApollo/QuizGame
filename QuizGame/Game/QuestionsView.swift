@@ -59,5 +59,5 @@ struct QuestionsView: View {
 }
 
 #Preview {
-    QuestionsView(viewModel: GameViewModel(generatedGame: .fixture()))
+    QuestionsView(viewModel: GameViewModel(generatedGame: .fixture(), repository: GameRepositoryStub()))
 }
