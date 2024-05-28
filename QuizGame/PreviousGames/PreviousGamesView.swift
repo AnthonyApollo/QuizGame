@@ -9,6 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct PreviousGamesView: View {
+    @Environment(\.modelContext) var modelContext
     @Query private var previousGames: [PreviousGame]
 
     var body: some View {
@@ -19,7 +20,14 @@ struct PreviousGamesView: View {
                 ForEach(previousGames) { previousGame in
                     Text(previousGame.theme)
                 }
+                .onDelete(perform: deleteItems)
             }
+        }
+    }
+
+    func deleteItems(indexes: IndexSet) {
+        for index in indexes {
+            try? modelContext.delete(previousGames[index])
         }
     }
 }
