@@ -25,7 +25,7 @@ protocol NewGameViewModelProtocol {
     var gameTheme: String = ""
     var generatedGame: GeneratedGame?
     var numberOfQuestions: Int = 5
-    var gptModel: GPTModel = .gpt4
+    var gptModel: GPTModel = .gpt4o
 
     private let repository: NewGameRepositoryProtocol
     private var subscriptions = Set<AnyCancellable>()

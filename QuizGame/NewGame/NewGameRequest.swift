@@ -67,4 +67,5 @@ struct OpenAIResponseFormat: Encodable {
 enum GPTModel: String, CaseIterable, Encodable {
     case gpt3 = "gpt-3.5-turbo"
     case gpt4 = "gpt-4-turbo-preview"
+    case gpt4o = "gpt-4o"
 }
