@@ -5,16 +5,19 @@
 //  Created by Anthony Apollo on 25/05/24.
 //
 
+import Foundation
 import SwiftData
 
 @Model
 class PreviousGame {
+    let date: Date
     let theme: String
     let rightAnswers: Int
     let wrongAnswers: Int
     let questions: [AnsweredQuestion]
 
     init(theme: String, rightAnswers: Int, wrongAnswers: Int, questions: [AnsweredQuestion]) {
+        self.date = .now
         self.theme = theme
         self.rightAnswers = rightAnswers
         self.wrongAnswers = wrongAnswers

@@ -11,17 +11,27 @@ import SwiftUI
 struct PreviousGamesView: View {
     @Environment(\.modelContext) var modelContext
     @Query private var previousGames: [PreviousGame]
+    @State var viewModel = PreviousGamesViewModel()
 
     var body: some View {
-        if previousGames.isEmpty {
-            Text("You haven't finished a game yet")
-        } else {
-            List {
-                ForEach(previousGames) { previousGame in
-                    Text(previousGame.theme)
+        NavigationStack {
+            if previousGames.isEmpty {
+                Text("You haven't finished a game yet")
+            } else {
+                List {
+                    ForEach(viewModel.dates, id: \.description) { date in
+                        Section(date) {
+                            ForEach(viewModel.organizedPreviousGames[date]!) { previousGame in
+                                Text(previousGame.theme)
+                            }
+                            .onDelete(perform: deleteItems)
+                        }
+                    }
                 }
-                .onDelete(perform: deleteItems)
             }
+        }
+        .onAppear {
+            viewModel.previousGames = previousGames
         }
     }
 
